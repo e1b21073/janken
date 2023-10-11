@@ -44,8 +44,9 @@ public class JankenController {
     // プレイヤーの手
     model.addAttribute("playerChoice", playerChoice);
 
-    // CPUの手（グー）
-    String computerChoice = "Gu";
+    // CPUの手
+    Janken cpuChoice = new Janken();
+    String computerChoice = cpuChoice.cpuRandomHand();
     model.addAttribute("computerChoice", computerChoice);
 
     // 結果
