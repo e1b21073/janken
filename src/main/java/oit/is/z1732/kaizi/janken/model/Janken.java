@@ -1,7 +1,10 @@
 package oit.is.z1732.kaizi.janken.model;
 
+import java.util.Random;
+
 public class Janken {
   String result;
+  String randomHand;
 
   public Janken(String playerChoice, String computerChoice) {
     if (playerChoice.equals(computerChoice)) {
@@ -15,6 +18,21 @@ public class Janken {
     }
   }
 
+  public Janken() {
+    Random rand = new Random();
+    int randNum = rand.nextInt(3);
+
+    if (randNum == 0) {
+      randomHand = "Gu";
+    } else if (randNum == 1) {
+      randomHand = "Choki";
+    } else if (randNum == 2) {
+      randomHand = "Pa";
+    } else {
+      randomHand = "Pa";
+    }
+  }
+
   public String gameResult() {
     return getResult();
   }
@@ -25,5 +43,13 @@ public class Janken {
 
   public void setResult(String result) {
     this.result = result;
+  }
+
+  public String cpuRandomHand() {
+    return getRandomHand();
+  }
+
+  public String getRandomHand() {
+    return randomHand;
   }
 }
