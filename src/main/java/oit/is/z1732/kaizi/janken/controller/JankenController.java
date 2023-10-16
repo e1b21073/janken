@@ -1,13 +1,21 @@
 package oit.is.z1732.kaizi.janken.controller;
 
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import oit.is.z1732.kaizi.janken.model.Janken;
+import oit.is.z1732.kaizi.janken.model.Entry;
 
 @Controller
 public class JankenController {
+
+  @Autowired
+  private Entry entry;
 
   @GetMapping("/index")
   public String showIndex() {
@@ -27,10 +35,12 @@ public class JankenController {
     return "janken";
   }
 
-  @GetMapping("/janken")
-  public String showGetJanken() {
-    return "janken";
-  }
+  /*
+   * @GetMapping("/janken")
+   * public String showGetJanken() {
+   * return "janken";
+   * }
+   */
 
   /**
    *
@@ -52,6 +62,16 @@ public class JankenController {
     // 結果
     Janken result = new Janken(playerChoice, computerChoice);
     model.addAttribute("result", result.gameResult());
+
+    return "janken.html";
+  }
+
+  @GetMapping("/janken")
+  public String getLoginUser(Principal prin, ModelMap model) {
+    String loginUser = prin.getName();
+    model.addAttribute("login_user", loginUser);
+    this.entry.addUser(loginUser);
+    model.addAttribute("room", this.entry);
 
     return "janken.html";
   }
