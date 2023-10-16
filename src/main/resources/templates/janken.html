@@ -1,13 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
 
 <head>
 
 </head>
 
 <body>
+  <a href="/logout">ログアウト</a>
+
   <h1>Janken GAME!</h1>
-  <p th:if="${name}">Hi [[${name}]]</p>
+
+  <p>エントリー</p>
+  <div th:if="${room}">
+    <ul>
+      <li th:each="user : ${room.users}">[[${user}]]</li>
+    </ul>
+  </div>
+
+  <p>Hi [[${login_user}]]</p>
+
+  <!--<p th:if="${name}">Hi [[${name}]]</p>-->
   <a href="/play2?playerChoice=Gu">ぐー</a>
   <a href="/play2?playerChoice=Choki">ちょき</a>
   <a href="/play2?playerChoice=Pa">ぱー</a>
