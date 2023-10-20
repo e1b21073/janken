@@ -10,14 +10,14 @@
 
   <h1>Janken GAME!</h1>
 
+  <p>Hi <span sec:authentication="name"></span></p>
+
   <p>エントリー</p>
-  <div th:if="${room}">
+  <div>
     <ul>
-      <li th:each="user : ${room.users}">[[${user}]]</li>
+      <li th:each="entryUser:${entryUsers}">[[${entryUser}]]</li>
     </ul>
   </div>
-
-  <p>Hi [[${login_user}]]</p>
 
   <!--<p th:if="${name}">Hi [[${name}]]</p>-->
   <a href="/play2?playerChoice=Gu">ぐー</a>
