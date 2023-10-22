@@ -6,21 +6,30 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+//import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import oit.is.z1732.kaizi.janken.model.Janken;
+import oit.is.z1732.kaizi.janken.model.Match;
+import oit.is.z1732.kaizi.janken.model.MatchMapper;
 //import oit.is.z1732.kaizi.janken.model.User;
+//import oit.is.z1732.kaizi.janken.model.Match;
 import oit.is.z1732.kaizi.janken.model.UserMapper;
 //import oit.is.z1732.kaizi.janken.model.Entry;
 
 @Controller
 public class JankenController {
 
-  @Autowired
+  // @Autowired
   // private Entry entry;
+
+  @Autowired
   UserMapper userMapper;
+
+  @Autowired
+  MatchMapper matchMapper;
 
   @GetMapping("/index")
   public String showIndex() {
@@ -41,6 +50,10 @@ public class JankenController {
 
     ArrayList<String> entryUsers = userMapper.selectAllUsername();
     model.addAttribute("entryUsers", entryUsers);
+
+    ArrayList<Match> matchResults = matchMapper.selectAllMatch();
+    model.addAttribute("matchResults", matchResults);
+
     return "janken";
   }
 
@@ -49,6 +62,10 @@ public class JankenController {
   public String startGetJanken(ModelMap model) {
     ArrayList<String> entryUsers = userMapper.selectAllUsername();
     model.addAttribute("entryUsers", entryUsers);
+
+    ArrayList<Match> matchResults = matchMapper.selectAllMatch();
+    model.addAttribute("matchResults", matchResults);
+
     return "janken";
   }
 
