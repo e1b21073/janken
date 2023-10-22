@@ -12,17 +12,30 @@
 
   <p>Hi <span sec:authentication="name"></span></p>
 
-  <p>エントリー</p>
+  <h2>エントリー</h2>
   <div>
     <ul>
       <li th:each="entryUser:${entryUsers}">[[${entryUser}]]</li>
     </ul>
   </div>
 
+  <p th:if="${matchResults}">
+  <div th:each="matchResult:${matchResults}">
+    <tr>
+      <td>id:[[${matchResult.id}]]</td>
+      <td>user1:[[${matchResult.user1}]]</td>
+      <td>user2:[[${matchResult.user2}]]</td>
+      <td>user1の手:[[${matchResult.user1Hand}]]</td>
+      <td>user2の手:[[${matchResult.user2Hand}]]</td>
+    </tr>
+  </div>
+  </p>
+
   <!--<p th:if="${name}">Hi [[${name}]]</p>-->
-  <a href="/play2?playerChoice=Gu">ぐー</a>
+  <!--<a href="/play2?playerChoice=Gu">ぐー</a>
   <a href="/play2?playerChoice=Choki">ちょき</a>
   <a href="/play2?playerChoice=Pa">ぱー</a>
+  -->
 
   <div th:if="${playerChoice}">
     <p>あなたの手 [[${playerChoice}]]</p>
