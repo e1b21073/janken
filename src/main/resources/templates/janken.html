@@ -13,9 +13,10 @@
   <p>Hi <span sec:authentication="name"></span></p>
 
   <h2>エントリー</h2>
-  <div>
+  <div th:if="${entryUsers}">
     <ul>
-      <li th:each="entryUser:${entryUsers}">[[${entryUser}]]</li>
+      <li th:each="entryUser:${entryUsers}"><a
+          th:href="@{/match(enemyUserId=${entryUser.id})}">[[${entryUser.name}]]</a></li>
     </ul>
   </div>
 

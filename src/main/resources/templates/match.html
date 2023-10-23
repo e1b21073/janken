@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/schema/security">
+
+<head>
+
+</head>
+
+<body>
+  <a href="/logout">ログアウト</a>
+
+  <h1>Match</h1>
+
+  <h2><span sec:authentication="name"></span> V.S. [[${enemyUser.name}]]</h2>
+
+  <!--<a href="/play2?playerChoice=Gu">ぐー</a>
+  <a href="/play2?playerChoice=Choki">ちょき</a>
+  <a href="/play2?playerChoice=Pa">ぱー</a>
+
+  <div th:if="${playerChoice}">
+    <p>あなたの手 [[${playerChoice}]]</p>
+    <p>相手の手 [[${computerChoice}]]</p>
+    <p>結果 [[${result}]]</p>
+  </div>-->
+</body>
+
+</html>
