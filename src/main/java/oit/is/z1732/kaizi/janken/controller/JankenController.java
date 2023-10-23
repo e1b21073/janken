@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import oit.is.z1732.kaizi.janken.model.Janken;
 import oit.is.z1732.kaizi.janken.model.Match;
 import oit.is.z1732.kaizi.janken.model.MatchMapper;
-//import oit.is.z1732.kaizi.janken.model.User;
+import oit.is.z1732.kaizi.janken.model.User;
 //import oit.is.z1732.kaizi.janken.model.Match;
 import oit.is.z1732.kaizi.janken.model.UserMapper;
 //import oit.is.z1732.kaizi.janken.model.Entry;
@@ -48,7 +48,7 @@ public class JankenController {
   public String startPostJanken(@RequestParam String name, Model model) {
     model.addAttribute("name", name);
 
-    ArrayList<String> entryUsers = userMapper.selectAllUsername();
+    ArrayList<User> entryUsers = userMapper.selectAllUser();
     model.addAttribute("entryUsers", entryUsers);
 
     ArrayList<Match> matchResults = matchMapper.selectAllMatch();
@@ -60,13 +60,21 @@ public class JankenController {
   @GetMapping("/janken")
   @Transactional
   public String startGetJanken(ModelMap model) {
-    ArrayList<String> entryUsers = userMapper.selectAllUsername();
+    ArrayList<User> entryUsers = userMapper.selectAllUser();
     model.addAttribute("entryUsers", entryUsers);
 
     ArrayList<Match> matchResults = matchMapper.selectAllMatch();
     model.addAttribute("matchResults", matchResults);
 
     return "janken";
+  }
+
+  @GetMapping("/match")
+  public String matchJanken(@RequestParam Integer enemyUserId, ModelMap model) {
+    User enemyUser = userMapper.selectUserById(enemyUserId);
+    model.addAttribute("enemyUser", enemyUser);
+
+    return "match.html";
   }
 
   /**
