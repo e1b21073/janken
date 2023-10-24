@@ -11,8 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import oit.is.z1732.kaizi.janken.model.Janken;
+//import oit.is.z1732.kaizi.janken.model.Janken;
 import oit.is.z1732.kaizi.janken.model.Match;
+import oit.is.z1732.kaizi.janken.model.MatchInfo;
+import oit.is.z1732.kaizi.janken.model.MatchInfoMapper;
 import oit.is.z1732.kaizi.janken.model.MatchMapper;
 import oit.is.z1732.kaizi.janken.model.User;
 //import oit.is.z1732.kaizi.janken.model.Match;
@@ -30,6 +32,9 @@ public class JankenController {
 
   @Autowired
   MatchMapper matchMapper;
+
+  @Autowired
+  MatchInfoMapper matchInfoMapper;
 
   @GetMapping("/index")
   public String showIndex() {
@@ -85,22 +90,26 @@ public class JankenController {
     model.addAttribute("playerChoice", playerChoice);
 
     // CPUの手
-    Janken cpuChoice = new Janken();
-    String computerChoice = cpuChoice.cpuRandomHand();
-    model.addAttribute("computerChoice", computerChoice);
+    /*
+     * Janken cpuChoice = new Janken();
+     * String computerChoice = cpuChoice.cpuRandomHand();
+     * model.addAttribute("computerChoice", computerChoice);
+     */
 
     // 結果
-    Janken result = new Janken(playerChoice, computerChoice);
-    model.addAttribute("result", result.gameResult());
+    /*
+     * Janken result = new Janken(playerChoice, computerChoice);
+     * model.addAttribute("result", result.gameResult());
+     */
 
-    Match matchInfo = new Match();
+    MatchInfo matchInfo = new MatchInfo();
     matchInfo.setUser1(loginUser.getId());
     matchInfo.setUser2(enemyUserId);
     matchInfo.setUser1Hand(playerChoice);
-    matchInfo.setUser2Hand(computerChoice);
-    matchMapper.insertUserResult(matchInfo);
+    /* matchInfo.setUser2Hand(computerChoice); */
+    matchInfoMapper.insertMatchInfo(matchInfo);
     model.addAttribute("matchInfo", matchInfo);
 
-    return "match.html";
+    return "wait.html";
   }
 }
