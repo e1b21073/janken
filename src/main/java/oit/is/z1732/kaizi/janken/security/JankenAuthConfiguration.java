@@ -62,6 +62,9 @@ public class JankenAuthConfiguration {
     // pass : isdev
     UserDetails user3 = User.withUsername("ほんだ")
         .password("{bcrypt}$2y$10$Lrl5hT.xaQvx2K9aBWSUHuFqQZfCtA/idLkP0ZHY4k6NeLfTg3x66").roles("USER").build();
+    // pass : isdev
+    UserDetails user4 = User.withUsername("いがき")
+        .password("{bcrypt}$2y$10$498jOoN/kcipZ6al.ILTIur.z98OaWNtRs3ii/kSEDtzZHga0qMsO").roles("USER").build();
     /*
      * UserDetails admin = User.withUsername("admin")
      * .password(
@@ -70,6 +73,6 @@ public class JankenAuthConfiguration {
      */
 
     // 生成したユーザをImMemoryUserDetailsManagerに渡す（いくつでも良い）
-    return new InMemoryUserDetailsManager(user1, user2, user3);
+    return new InMemoryUserDetailsManager(user1, user2, user3,user4);
   }
 }

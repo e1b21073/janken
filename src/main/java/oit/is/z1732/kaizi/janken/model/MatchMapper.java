@@ -12,7 +12,7 @@ public interface MatchMapper {
   @Select("SELECT * from matches;")
   ArrayList<Match> selectAllMatch();
 
-  @Insert("Insert INTO matches (user1,user2,user1Hand,user2Hand) VALUES (#{user1},#{user2},#{user1Hand},#{user2Hand});")
+  @Insert("Insert INTO matches (user1,user2,user1Hand,user2Hand,isActive) VALUES (#{user1},#{user2},#{user1Hand},#{user2Hand},false);")
   @Options(useGeneratedKeys = true, keyColumn = "id", keyProperty = "id")
   void insertUserResult(Match match);
 }

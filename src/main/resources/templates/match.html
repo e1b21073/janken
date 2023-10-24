@@ -16,11 +16,11 @@
   <a th:href="@{/fight(playerChoice=Choki, enemyUserId=${enemyUser.id})}">ちょき</a>
   <a th:href="@{/fight(playerChoice=Pa, enemyUserId=${enemyUser.id})}">ぱー</a>
 
-  <div th:if="${playerChoice}">
+  <!--<div th:if="${playerChoice}">
     <p>あなたの手 [[${playerChoice}]]</p>
     <p>相手の手 [[${computerChoice}]]</p>
     <p>結果 [[${result}]]</p>
-  </div>
+  </div>-->
 
   <a href="/janken">もどる</a>
 </body>
