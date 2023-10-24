@@ -10,17 +10,19 @@
 
   <h1>Match</h1>
 
-  <h2><span sec:authentication="name"></span> V.S. [[${enemyUser.name}]]</h2>
+  <h2><span sec:authentication="name"></span> V.S. <span th:if="${enemyUser}" th:text="${enemyUser.name}"></span></h2>
 
-  <!--<a href="/play2?playerChoice=Gu">ぐー</a>
-  <a href="/play2?playerChoice=Choki">ちょき</a>
-  <a href="/play2?playerChoice=Pa">ぱー</a>
+  <a th:href="@{/fight(playerChoice=Gu, enemyUserId=${enemyUser.id})}">ぐー</a>
+  <a th:href="@{/fight(playerChoice=Choki, enemyUserId=${enemyUser.id})}">ちょき</a>
+  <a th:href="@{/fight(playerChoice=Pa, enemyUserId=${enemyUser.id})}">ぱー</a>
 
   <div th:if="${playerChoice}">
     <p>あなたの手 [[${playerChoice}]]</p>
     <p>相手の手 [[${computerChoice}]]</p>
     <p>結果 [[${result}]]</p>
-  </div>-->
+  </div>
+
+  <a href="/janken">もどる</a>
 </body>
 
 </html>

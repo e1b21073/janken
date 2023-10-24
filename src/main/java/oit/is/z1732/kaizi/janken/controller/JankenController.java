@@ -1,6 +1,6 @@
 package oit.is.z1732.kaizi.janken.controller;
 
-//import java.security.Principal;
+import java.security.Principal;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,20 +43,6 @@ public class JankenController {
    * @return
    */
 
-  @PostMapping("/janken")
-  @Transactional
-  public String startPostJanken(@RequestParam String name, Model model) {
-    model.addAttribute("name", name);
-
-    ArrayList<User> entryUsers = userMapper.selectAllUser();
-    model.addAttribute("entryUsers", entryUsers);
-
-    ArrayList<Match> matchResults = matchMapper.selectAllMatch();
-    model.addAttribute("matchResults", matchResults);
-
-    return "janken";
-  }
-
   @GetMapping("/janken")
   @Transactional
   public String startGetJanken(ModelMap model) {
@@ -84,8 +70,17 @@ public class JankenController {
    * @return
    */
 
-  @GetMapping("/play2")
-  public String play2Janken(@RequestParam String playerChoice, Model model) {
+  @GetMapping("/fight")
+  public String fightJanken(@RequestParam String playerChoice, @RequestParam Integer enemyUserId, Model model,
+      Principal prin) {
+    String loginUserName = prin.getName();
+
+    User loginUser = userMapper.selectUserByName(loginUserName);
+    model.addAttribute("loginUser", loginUser);
+
+    User enemyUser = userMapper.selectUserById(enemyUserId);
+    model.addAttribute("enemyUser", enemyUser);
+
     // プレイヤーの手
     model.addAttribute("playerChoice", playerChoice);
 
@@ -98,6 +93,14 @@ public class JankenController {
     Janken result = new Janken(playerChoice, computerChoice);
     model.addAttribute("result", result.gameResult());
 
-    return "janken.html";
+    Match matchInfo = new Match();
+    matchInfo.setUser1(loginUser.getId());
+    matchInfo.setUser2(enemyUserId);
+    matchInfo.setUser1Hand(playerChoice);
+    matchInfo.setUser2Hand(computerChoice);
+    matchMapper.insertUserResult(matchInfo);
+    model.addAttribute("matchInfo", matchInfo);
+
+    return "match.html";
   }
 }
