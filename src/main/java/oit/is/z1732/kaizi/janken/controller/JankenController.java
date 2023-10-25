@@ -54,6 +54,9 @@ public class JankenController {
     ArrayList<User> entryUsers = userMapper.selectAllUser();
     model.addAttribute("entryUsers", entryUsers);
 
+    ArrayList<MatchInfo> activeMatches = matchInfoMapper.selectActiveMatch();
+    model.addAttribute("activeMatches", activeMatches);
+
     ArrayList<Match> matchResults = matchMapper.selectAllMatch();
     model.addAttribute("matchResults", matchResults);
 
